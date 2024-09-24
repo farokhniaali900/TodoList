@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+    <form 
+        {% if form.title.data or form.task.data %}
+            action="{{ url_for('edit') }}"
+        {% else %}
+            action="{{ url_for('add') }}"
+        {% endif %}
+    method="post">
+        {{ form.title.label }}
+        {{ form.title }}
+        {{ form.task.label }}
+        {{ form.task }}
+        {{ form.submit }}
+    </form>
+{% endblock %}
