@@ -1,16 +1,26 @@
 {% extends "base.html" %}
 {% block content %}
+    <h2>Add Task</h2>
     <form 
         {% if form.title.data or form.task.data %}
             action="{{ url_for('edit') }}"
         {% else %}
             action="{{ url_for('add') }}"
         {% endif %}
-    method="post">
-        {{ form.title.label }}
-        {{ form.title }}
-        {{ form.task.label }}
-        {{ form.task }}
-        {{ form.submit }}
+        method="post" class="bg-light p-4 rounded shadow">
+        
+        {{ form.hidden_tag() }}  {# Include CSRF token #}
+        
+        <div class="mb-3">
+            {{ form.title.label(class="form-label") }}
+            {{ form.title(class="form-control") }}
+        </div>
+        <div class="mb-3">
+            {{ form.task.label(class="form-label") }}
+            {{ form.task(class="form-control") }}
+        </div>
+        <div>
+            {{ form.submit(class="btn btn-primary") }}
+        </div>
     </form>
 {% endblock %}
