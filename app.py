@@ -7,12 +7,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config["SECRET_KEY"] = 'SOME SECRETS'
 db = SQLAlchemy(app)
-
-class TaskData(db.Model):
-    id = db.Column(db.Integer , primary_key=True)
-    title = db.Column(db.String(30))
-    task = db.Column(db.Text())
-    done = db.Column(db.Boolean() , default=False)
+from models import TaskData
 
 
 @app.route('/' , methods=["GET" , "POST"])
