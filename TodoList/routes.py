@@ -1,13 +1,7 @@
-from flask import Flask , render_template , request , redirect , url_for , session
-from flask_sqlalchemy import SQLAlchemy
-from forms import TaskForm
-
-app = Flask(__name__ , template_folder='templates')
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config["SECRET_KEY"] = 'SOME SECRETS'
-db = SQLAlchemy(app)
-from models import TaskData
+from TodoList.models import TaskData
+from TodoList.forms import TaskForm
+from flask import render_template, request, redirect, url_for, session
+from TodoList import app , db
 
 
 @app.route('/' , methods=["GET" , "POST"])
@@ -78,9 +72,3 @@ def edit():
         data.task = form.task.data
         db.session.commit()
     return redirect(url_for('home'))
-    
-    
-if __name__ == "__main__":
-    with app.app_context():
-        db.create_all()
-    app.run(debug=True)

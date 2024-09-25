@@ -1,4 +1,4 @@
-from app import db
+from TodoList import db
 
 class TaskData(db.Model):
     id = db.Column(db.Integer , primary_key=True)
